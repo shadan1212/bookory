@@ -70,7 +70,7 @@ cd ../frontend
 npm install
 ```
 
-3. Configure environment variables: Create a `.env` file in the backend directory with the following variables:
+3. Configure environment variables: Create a `.env` file in the backend directory with the following variables. Make sure you get your CLOUD_NAME, API_KEY and API_SECRET by signing on Cloudinary.
 
 ```bash
 PORT = 5000
