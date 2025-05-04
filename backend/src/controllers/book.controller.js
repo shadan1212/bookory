@@ -101,12 +101,22 @@ const updateBook = async (req, res) => {
 // Search books
 const searchBooks = async (req, res) => {
   try {
-    const searchTerm = req.query.searchTerm;
+    const { searchTerm } = req.query;
+    if (!searchTerm || searchTerm.trim() === "") {
+      return res.status(200).json({ books: [] });
+    }
+
+    // Search across multiple fields
     const books = await Book.find({
-      title: { $regex: searchTerm, $options: "i" },
+      $or: [
+        { title: { $regex: searchTerm, $options: "i" } },
+        { author: { $regex: searchTerm, $options: "i" } },
+        { description: { $regex: searchTerm, $options: "i" } },
+        { genre: { $regex: searchTerm, $options: "i" } },
+      ],
     }).sort({ createdAt: -1 });
 
-    return res.status(200).json({ books });
+    res.status(200).json({ books });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
