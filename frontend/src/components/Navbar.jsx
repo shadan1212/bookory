@@ -3,9 +3,10 @@ import { Menu, X, ShoppingCart, Book, User, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuthStore();
 
   const navigate = useNavigate();
@@ -31,6 +32,11 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
+
+        <div className="hidden md:block">
+          <SearchBar />
+        </div>
+
         {!user && (
           <div className=" hidden md:flex justify-between items-center gap-10 cursor-pointer">
             <Link to={"/search"}>
@@ -59,13 +65,13 @@ const Navbar = () => {
 
         {/* Role based rendering(Admin) */}
         {user && user.role === "admin" && (
-          <div className=" hidden md:flex justify-between items-center gap-10 cursor-pointer">
+          <div className="hidden md:flex justify-between items-center gap-10 cursor-pointer">
             <Link to={"/search"}>
               <span className="font-medium text-lg hover:bg-gray-100 px-5 py-3 rounded-lg">
                 Browse
               </span>
             </Link>
-            <div className=" hover:bg-gray-100 px-5 py-3 rounded-lg">
+            <div className="hover:bg-gray-100 px-5 py-3 rounded-lg">
               <Link to={"/cart"}>
                 <ShoppingCart className="h-5 w-5" />
               </Link>
@@ -86,7 +92,7 @@ const Navbar = () => {
 
         {/* Role based rendering(User) */}
         {user && user.role === "user" && (
-          <div className=" hidden md:flex justify-between items-center gap-10 cursor-pointer">
+          <div className="hidden md:flex justify-between items-center gap-10 cursor-pointer">
             <Link to={"/search"}>
               <span className="font-medium text-lg hover:bg-gray-100 px-5 py-3 rounded-lg">
                 Browse
@@ -122,11 +128,91 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden min-h-screen mt-16  px-4 flex flex-col space-y-8 font-normal cursor-pointer">
-          <span className="text-2xl">Browse Books</span>
-          <ShoppingCart />
-          <span className="text-2xl">Login</span>
-          <span className="text-2xl">Sign Up</span>
+        <div
+          className="absolute top-full left-0 w-full bg-white shadow-lg min-h-screen mt-0 pt-5 px-4 flex flex-col space-y-6 font-normal cursor-pointer md:hidden" // Adjusted styling for dropdown appearance
+        >
+          {/* Search Bar for Mobile */}
+          <div className="px-2 py-2 flex items-center justify-center">
+            {" "}
+            {/* Add some padding */}
+            <SearchBar />
+          </div>
+
+          {/* Browse Link */}
+          <Link
+            to={"/search"}
+            className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3"
+          >
+            {/* Consider adding an icon if desired */}
+            Browse Books
+          </Link>
+
+          {/* Cart Link */}
+          <Link
+            to={"/cart"}
+            className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            Cart
+          </Link>
+
+          {/* Conditional Links based on Auth State */}
+          {!user && (
+            <>
+              <Link
+                to={"/login"}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg"
+              >
+                Login
+              </Link>
+              <Link
+                to={"/signup"}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+
+          {/* Admin Links */}
+          {user && user.role === "admin" && (
+            <>
+              <Link
+                to={"/admin"}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3"
+              >
+                <User className="h-5 w-5" />
+                Admin
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3 text-left w-full" // Use button for action
+              >
+                <LogOut className="h-5 w-5" />
+                Logout
+              </button>
+            </>
+          )}
+
+          {/* User Links */}
+          {user && user.role === "user" && (
+            <>
+              <Link
+                to={"/user-profile"}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3"
+              >
+                <User className="h-5 w-5" />
+                Account
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-xl hover:bg-gray-100 p-3 rounded-lg flex items-center gap-3 text-left w-full" // Use button for action
+              >
+                <LogOut className="h-5 w-5" />
+                Logout
+              </button>
+            </>
+          )}
         </div>
       )}
     </nav>

@@ -9,6 +9,7 @@ export const useBookStore = create((set) => ({
   book: null,
   books: [],
   similarBooks: [],
+  searchResults: [],
   isLoading: false,
   error: null,
   message: null,
@@ -92,6 +93,26 @@ export const useBookStore = create((set) => ({
       set({
         isLoading: false,
         error: error.response.data.message || "Error fetching similar books.",
+      });
+      throw error;
+    }
+  },
+
+  // Search books
+  searchBooks: async (searchTerm) => {
+    set({ isLoading: true, error: null });
+
+    try {
+      const response = await axios.get(
+        `${API_URL}/search/?searchTerm=${encodeURIComponent(searchTerm)}`
+      );
+
+      set({ searchResults: response.data.books, isLoading: false });
+      // console.log(searchResults);
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response?.data?.message || "Error searching books.",
       });
       throw error;
     }

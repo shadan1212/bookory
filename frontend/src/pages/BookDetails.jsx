@@ -14,7 +14,6 @@ const BookDetails = () => {
     fetchSimilarBooks(params.id);
   }, [fetchBook, params.id, fetchSimilarBooks]);
 
-  console.log(similarBooks);
   return (
     <div className="bg-cream-2 mt-18 min-h-screen py-12 px-6 lg:px-30">
       <Link to={"/?scroll=books"}>

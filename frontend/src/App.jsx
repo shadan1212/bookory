@@ -4,16 +4,16 @@ import Homepage from "./pages/Homepage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/MainLayout";
-import AuthLayout from "./components/AuthLayout";
+import NoNavbarLayout from "./components/NoNavbarLayout";
 import { useAuthStore } from "./store/authStore";
 import RedirectAuthenticatedUsers from "./providers/RedirectAuthenticatedUsers";
 import AdminDashboard from "./pages/AdminDashboard";
-import Browse from "./pages/Browse";
 import Cart from "./pages/Cart";
 import UserDashboard from "./pages/UserDashboard";
 import RedirectUnauthenticatedUsers from "./providers/RedirectUnauthenticatedUsers";
 import BookDetails from "./pages/BookDetails";
 import { Toaster } from "react-hot-toast";
+import SearchPage from "./pages/SearchPage";
 
 const App = () => {
   const { fetchUser, fetchingUser } = useAuthStore();
@@ -59,9 +59,9 @@ const App = () => {
         <Route
           path="/search"
           element={
-            <MainLayout>
-              <Browse />
-            </MainLayout>
+            <NoNavbarLayout>
+              <SearchPage />
+            </NoNavbarLayout>
           }
         />
         <Route
@@ -85,21 +85,21 @@ const App = () => {
         <Route
           path="/signup"
           element={
-            <AuthLayout>
+            <NoNavbarLayout>
               <RedirectAuthenticatedUsers>
                 <SignupPage />
               </RedirectAuthenticatedUsers>
-            </AuthLayout>
+            </NoNavbarLayout>
           }
         />
         <Route
           path="/login"
           element={
-            <AuthLayout>
+            <NoNavbarLayout>
               <RedirectAuthenticatedUsers>
                 <LoginPage />
               </RedirectAuthenticatedUsers>
-            </AuthLayout>
+            </NoNavbarLayout>
           }
         />
       </Routes>

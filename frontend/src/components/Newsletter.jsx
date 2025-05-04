@@ -3,7 +3,7 @@ import { Bookmark } from "lucide-react";
 
 const Newsletter = () => {
   return (
-    <div className="bg-burgandy py-12">
+    <div className="bg-burgandy py-12 h-[45vh]">
       <div className="flex flex-col items-center justify-center gap-4">
         <Bookmark className="text-white w-12 h-12" />
         <h1 className="text-4xl font-bold  text-white font-playflair">
