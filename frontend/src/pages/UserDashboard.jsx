@@ -11,6 +11,7 @@ import {
 import { useAuthStore } from "../store/authStore";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const UserDashboard = () => {
   const { user, updateProfile, error, isLoading } = useAuthStore();
@@ -38,6 +39,7 @@ const UserDashboard = () => {
       console.log("error: ", error);
     }
   };
+  console.log(user.username);
   return (
     <div className="mt-18 bg-cream-2 min-h-screen py-12 px-6 lg:px-30">
       <div className="flex flex-col gap-5">
@@ -51,23 +53,19 @@ const UserDashboard = () => {
         </div>
 
         <div className="flex items-center justify-center text-gray-1 lg:justify-start gap-6">
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
+          <div className="flex justify-between items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg cursor-pointer">
             <div>
               <CircleUser className="h-4 w-4" />
             </div>
             <span className="font-medium">Profile</span>
           </div>
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
+          <div className="flex justify-between items-center gap-2  px-4 py-2 rounded-lg cursor-pointer">
             <div>
               <Package className="h-4 w-4" />
             </div>
-            <span className="font-medium">Orders</span>
-          </div>
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
-            <div>
-              <LibraryBig className="h-4 w-4" />
-            </div>
-            <span className="font-medium">My Books</span>
+            <Link to="/user-profile/orders">
+              <span className="font-medium">Orders</span>
+            </Link>
           </div>
         </div>
       </div>

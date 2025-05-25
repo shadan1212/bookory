@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import SignupPage from "./pages/SignupPage";
@@ -14,6 +14,9 @@ import RedirectUnauthenticatedUsers from "./providers/RedirectUnauthenticatedUse
 import BookDetails from "./pages/BookDetails";
 import { Toaster } from "react-hot-toast";
 import SearchPage from "./pages/SearchPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import UserOrders from "./pages/UserOrders";
+import OrderDetails from "./pages/OrderDetails";
 
 const App = () => {
   const { fetchUser, fetchingUser } = useAuthStore();
@@ -65,6 +68,14 @@ const App = () => {
           }
         />
         <Route
+          path="/checkout"
+          element={
+            <MainLayout>
+              <CheckoutPage />
+            </MainLayout>
+          }
+        />
+        <Route
           path="cart"
           element={
             <MainLayout>
@@ -78,6 +89,26 @@ const App = () => {
             <MainLayout>
               <RedirectUnauthenticatedUsers>
                 <UserDashboard />
+              </RedirectUnauthenticatedUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/user-profile/orders"
+          element={
+            <MainLayout>
+              <RedirectUnauthenticatedUsers>
+                <UserOrders />
+              </RedirectUnauthenticatedUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/orders/:id"
+          element={
+            <MainLayout>
+              <RedirectUnauthenticatedUsers>
+                <OrderDetails />
               </RedirectUnauthenticatedUsers>
             </MainLayout>
           }

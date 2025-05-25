@@ -111,7 +111,6 @@ const searchBooks = async (req, res) => {
       $or: [
         { title: { $regex: searchTerm, $options: "i" } },
         { author: { $regex: searchTerm, $options: "i" } },
-        { description: { $regex: searchTerm, $options: "i" } },
         { genre: { $regex: searchTerm, $options: "i" } },
       ],
     }).sort({ createdAt: -1 });

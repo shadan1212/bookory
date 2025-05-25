@@ -1,18 +1,34 @@
 import { ChevronLeft, ShoppingCart } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useBookStore } from "../store/bookStore";
 import { useEffect } from "react";
 import BookCard from "../components/BookCard";
 
 const BookDetails = () => {
-  const { book, fetchBook, similarBooks, fetchSimilarBooks } = useBookStore();
+  const { book, fetchBook, similarBooks, fetchSimilarBooks, isLoading } =
+    useBookStore();
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBook(params.id);
 
     fetchSimilarBooks(params.id);
   }, [fetchBook, params.id, fetchSimilarBooks]);
+
+  const buyNowItem = {
+    book: {
+      _id: book?._id,
+      title: book?.title,
+      image: book?.image,
+      quantity: 1,
+      price: Number(book?.price),
+    },
+  };
+  const isPriceAvailable =
+    book && typeof book.price !== "undefined" && !isNaN(Number(book.price));
+
+  // console.log(book?.price);
 
   return (
     <div className="bg-cream-2 mt-18 min-h-screen py-12 px-6 lg:px-30">
@@ -49,7 +65,15 @@ const BookDetails = () => {
                 <ShoppingCart className="w-4 h-4" />
                 <span className="text-sm font-medium">Add to cart</span>
               </button>
-              <button className="bg-cream-2 border border-gray-1 px-7 py-2 rounded-md text-black hover:bg-white cursor-pointer">
+              <button
+                onClick={() =>
+                  navigate("/checkout", {
+                    state: { orderItems: [buyNowItem], isBuyNow: true },
+                  })
+                }
+                disabled={!isPriceAvailable || isLoading}
+                className="bg-cream-2 border border-gray-1 px-7 py-2 rounded-md text-black hover:bg-white cursor-pointer"
+              >
                 <span className="text-sm font-medium">Buy Now</span>
               </button>
             </div>
