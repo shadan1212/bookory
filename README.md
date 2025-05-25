@@ -1,4 +1,4 @@
-# 📚 Bookory - Online Bookstore App
+# 📚 Bookory - Online Bookstore WebApp
 
 Bookory is a full-stack Online Bookstore built with the MERN stack. It allows users to browse, search, and buy books, while admins can add and manage the inventory.
 
