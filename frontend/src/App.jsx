@@ -17,6 +17,9 @@ import SearchPage from "./pages/SearchPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import UserOrders from "./pages/UserOrders";
 import OrderDetails from "./pages/OrderDetails";
+import RedirectNonAdminUsers from "./providers/RedirectNonAdminUsers";
+import UpdateOrderStatus from "./pages/UpdateOrderStatus";
+import AdminOrders from "./pages/AdminOrders";
 
 const App = () => {
   const { fetchUser, fetchingUser } = useAuthStore();
@@ -45,9 +48,29 @@ const App = () => {
           path="/admin"
           element={
             <MainLayout>
-              <RedirectUnauthenticatedUsers>
+              <RedirectNonAdminUsers>
                 <AdminDashboard />
-              </RedirectUnauthenticatedUsers>
+              </RedirectNonAdminUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <MainLayout>
+              <RedirectNonAdminUsers>
+                <AdminOrders />
+              </RedirectNonAdminUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/order-update/:id"
+          element={
+            <MainLayout>
+              <RedirectNonAdminUsers>
+                <UpdateOrderStatus />
+              </RedirectNonAdminUsers>
             </MainLayout>
           }
         />

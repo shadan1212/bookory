@@ -1,15 +1,38 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useOrderStore } from "../store/orderStore";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const OrderDetails = () => {
   const { id } = useParams();
-  const { order, fetchOrderById, error } = useOrderStore();
+  const navigate = useNavigate();
+
+  const { order, fetchOrderById, cancelOrder, error } = useOrderStore();
+
+  const [isCancelling, setIsCancelling] = useState(false);
 
   useEffect(() => {
     fetchOrderById(id);
   }, [id, fetchOrderById]);
+
+  const handleCancelOrder = async () => {
+    if (!order || !order._id) return;
+
+    const confirmCancel = window.confirm(
+      "Are you sure you want to cancel this order? This action cannot be undone."
+    );
+    if (!confirmCancel) {
+      return;
+    }
+
+    setIsCancelling(true);
+
+    await cancelOrder(order._id);
+    toast.success("Order cancelled successfully.");
+
+    setIsCancelling(false);
+  };
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -66,7 +89,7 @@ const OrderDetails = () => {
         </div>
 
         {/* Order Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border-b border-gray-200 pb-6 mb-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 border-b border-gray-200 pb-6 mb-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               Order Details
@@ -77,10 +100,10 @@ const OrderDetails = () => {
             </p>
           </div>
           <div className="text-left sm:text-right">
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-lg font-semibold text-gray-800 text-start">
               Total: ${order.paymentInfo?.totalAmount?.toFixed(2) || "N/A"}
             </p>
-            <p className="text-sm">
+            <p className="text-sm text-start">
               <span className="font-medium">Order Status:</span>
               <span
                 className={`ml-2 px-2 py-0.5 text-xs font-semibold rounded-full
@@ -118,6 +141,20 @@ const OrderDetails = () => {
                 {order.paymentInfo?.status}
               </span>
             </p>
+          </div>
+          <div className="my-6 text-right">
+            <button
+              onClick={handleCancelOrder}
+              disabled={isCancelling} // Disable if already cancelling or page is generally loading
+              className={`px-6 py-2 font-medium rounded-md transition-colors cursor-pointer
+                          ${
+                            isCancelling
+                              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                              : "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
+                          }`}
+            >
+              {isCancelling ? "Cancelling..." : "Cancel Order"}
+            </button>
           </div>
         </div>
 

@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { useOrderStore } from "../store/orderStore";
 import { Link, useNavigate } from "react-router-dom";
-import { CircleUser, Package } from "lucide-react";
+import { BookOpen, Package } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import { useOrderStore } from "../store/orderStore";
+import { useEffect } from "react";
 
-const UserOrders = () => {
+const AdminOrders = () => {
   const { user } = useAuthStore();
-  const { orders, error, fetchUserOrders } = useOrderStore();
+  const { orders, error, fetchAdminOrders } = useOrderStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchUserOrders();
-  }, [fetchUserOrders]);
+    fetchAdminOrders();
+  }, [fetchAdminOrders]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -34,24 +34,18 @@ const UserOrders = () => {
 
   if (!orders || orders.length === 0) {
     return (
-      <div className="mt-20 bg-cream-2 min-h-screen py-12 px-6 lg:px-30">
-        <div className="flex flex-col gap-5">
-          <div>
-            <h1 className="font-playflair text-3xl text-center font-bold pl-2 lg:text-start">
-              My Account, {user?.username}
-            </h1>
-            <p className="text-gray-1 text-center lg:text-start text-lg pl-2">
-              Welcome back
-            </p>
-          </div>
-
+      <div className="mt-18 bg-cream-2 min-h-screen py-12 px-6 lg:px-30">
+        <div className="flex flex-col gap-7">
+          <h1 className="font-playflair text-3xl text-center font-bold pl-2 lg:text-start">
+            Admin Dashboard
+          </h1>
           <div className="flex items-center justify-center text-gray-1 lg:justify-start gap-6">
             <div className="flex justify-between items-center gap-2  px-4 py-2 rounded-lg cursor-pointer">
               <div>
-                <CircleUser className="h-4 w-4" />
+                <BookOpen className="h-4 w-4" />
               </div>
-              <Link to="/user-profile">
-                <span className="font-medium">Profile</span>
+              <Link to="/admin">
+                <span className="font-medium">Books</span>
               </Link>
             </div>
             <div className="flex justify-between items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg cursor-pointer">
@@ -75,8 +69,10 @@ const UserOrders = () => {
             <div>
               <Package className="h-12 w-12 text-gray-1" />
             </div>
-            <p className="font-playflair text-lg font-medium">No orders yet</p>
-            <p className="text-gray-1">You haven't placed any orders yet.</p>
+            <p className="font-playflair text-lg font-medium">
+              No orders found
+            </p>
+            <p className="text-gray-1">Seems no one has ordered yet.</p>
             <button
               onClick={() => navigate("/")}
               className="px-5 py-2 bg-brown-2 rounded-lg text-white font-semibold cursor-pointer"
@@ -88,25 +84,20 @@ const UserOrders = () => {
       </div>
     );
   }
+
   return (
     <div className="mt-18 bg-cream-2 min-h-screen py-12 px-6 lg:px-30">
-      <div className="flex flex-col gap-5">
-        <div>
-          <h1 className="font-playflair text-3xl text-center font-bold pl-2 lg:text-start">
-            My Account
-          </h1>
-          <p className="text-gray-1 text-center lg:text-start text-lg pl-2">
-            Welcome back, {user?.username}
-          </p>
-        </div>
-
+      <div className="flex flex-col gap-7">
+        <h1 className="font-playflair text-3xl text-center font-bold pl-2 lg:text-start">
+          Admin Dashboard
+        </h1>
         <div className="flex items-center justify-center text-gray-1 lg:justify-start gap-6">
           <div className="flex justify-between items-center gap-2  px-4 py-2 rounded-lg cursor-pointer">
             <div>
-              <CircleUser className="h-4 w-4" />
+              <BookOpen className="h-4 w-4" />
             </div>
-            <Link to="/user-profile">
-              <span className="font-medium">Profile</span>
+            <Link to="/admin">
+              <span className="font-medium">Books</span>
             </Link>
           </div>
           <div className="flex justify-between items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg cursor-pointer">
@@ -222,10 +213,10 @@ const UserOrders = () => {
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 text-right">
                 <Link
-                  to={`/orders/${order._id}`}
+                  to={`/admin/order-update/${order._id}`}
                   className="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline"
                 >
-                  View Details &rarr;
+                  Update Order Status &rarr;
                 </Link>
               </div>
             </div>
@@ -236,4 +227,4 @@ const UserOrders = () => {
   );
 };
 
-export default UserOrders;
+export default AdminOrders;

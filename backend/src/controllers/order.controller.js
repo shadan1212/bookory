@@ -75,10 +75,22 @@ const getUserOrders = async (req, res) => {
   }
 };
 
+// get orders for Admin:
+const getAdminOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate("items.book", "title image price")
+      .sort({ createdAt: -1 });
+    res.status(200).json({ orders });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // Get a single order by Id
 const getOrderById = async (req, res) => {
   const orderId = req.params.id;
-  const userId = req.user._id;
+  const user = req.user;
 
   try {
     const order = await Order.findById({ _id: orderId })
@@ -89,7 +101,10 @@ const getOrderById = async (req, res) => {
       return res.status(404).json({ message: "Order not found." });
     }
 
-    if (order.user._id.toString() !== userId.toString()) {
+    if (
+      order.user._id.toString() !== user._id.toString() &&
+      user.role !== "admin"
+    ) {
       return res
         .status(403)
         .json({ message: "You are not authorized to view this order." });
@@ -192,6 +207,7 @@ const cancelOrder = async (req, res) => {
 export default {
   placeOrder,
   getUserOrders,
+  getAdminOrders,
   getOrderById,
   updateOrderStatus,
   cancelOrder,

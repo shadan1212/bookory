@@ -16,6 +16,15 @@ const BookDetails = () => {
     fetchSimilarBooks(params.id);
   }, [fetchBook, params.id, fetchSimilarBooks]);
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   const buyNowItem = {
     book: {
       _id: book?._id,
@@ -86,9 +95,7 @@ const BookDetails = () => {
             </div>
             <div className="flex items-center gap-50">
               <p className="font-medium text-gray-1">Added</p>
-              <p className="font-light">
-                {new Date(book?.createdAt).toLocaleDateString()}
-              </p>
+              <p className="font-light">{formatDate(book?.createdAt)}</p>
             </div>
           </div>
         </div>

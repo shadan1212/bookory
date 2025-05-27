@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useBookStore } from "../store/bookStore";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [image, setImage] = useState("");
@@ -64,23 +65,19 @@ const AdminDashboard = () => {
           Admin Dashboard
         </h1>
         <div className="flex items-center justify-center text-gray-1 lg:justify-start gap-6">
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
+          <div className="flex justify-between items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg cursor-pointer">
             <div>
               <BookOpen className="h-4 w-4" />
             </div>
             <span className="font-medium">Books</span>
           </div>
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
+          <div className="flex justify-between items-center gap-2 px-4 py-2 rounded-lg cursor-pointer">
             <div>
               <Package className="h-4 w-4" />
             </div>
-            <span className="font-medium">Orders</span>
-          </div>
-          <div className="flex justify-between items-center gap-2 hover:bg-gray-100 px-4 py-2 rounded-lg">
-            <div>
-              <Users className="h-4 w-4" />
-            </div>
-            <span className="font-medium">Users</span>
+            <Link to="/admin/orders">
+              <span className="font-medium">Orders</span>
+            </Link>
           </div>
         </div>
       </div>

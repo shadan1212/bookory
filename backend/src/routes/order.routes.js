@@ -7,6 +7,12 @@ const router = express.Router();
 
 router.post("/create-order", protect, orderController.placeOrder);
 router.get("/user-orders", protect, orderController.getUserOrders);
+router.get(
+  "/admin-orders",
+  protect,
+  requireAdmin,
+  orderController.getAdminOrders
+);
 router.put(
   "/status/:id",
   protect,
