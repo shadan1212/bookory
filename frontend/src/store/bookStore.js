@@ -117,4 +117,41 @@ export const useBookStore = create((set) => ({
       throw error;
     }
   },
+
+  // update a book (admin)
+  updateBook: async (id, updateData) => {
+    set({ isLoading: true, error: null, message: null });
+
+    try {
+      const response = await axios.put(`${API_URL}/${id}`, { updateData });
+      const { message, book: updatedBook } = response.data;
+
+      set({ book: updatedBook, message, isLoading: false });
+      return { success: true, message, book: updatedBook };
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response?.data?.message || "Error updating book.",
+      });
+      throw error;
+    }
+  },
+
+  // Delete book (admin)
+  deleteBook: async (id) => {
+    set({ isLoading: true, error: null, message: null });
+
+    try {
+      const response = await axios.delete(`${API_URL}/${id}`);
+      const { message } = response.data;
+      set({ message, isLoading: false });
+      return { message };
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response?.data?.message || "Error deleting book.",
+      });
+      throw error;
+    }
+  },
 }));

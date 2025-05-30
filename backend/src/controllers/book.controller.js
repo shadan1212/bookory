@@ -78,8 +78,20 @@ const fetchSimilarBooks = async (req, res) => {
 const deleteBook = async (req, res) => {
   try {
     const bookId = req.params.id;
-    const book = await Book.deleteOne({ _id: bookId });
-    res.json({ message: "The bokk is deleted successfully!" });
+
+    const book = await Book.findById(bookId);
+
+    // Delete the image first
+    const parts = book.image.split("/");
+    const fileName = parts[parts.length - 1]; // Extract the last part: "ihwklaco9wt2d0kqdqrs.png"
+    const imageId = fileName.split(".")[0];
+    cloudinary.uploader
+      .destroy(`Bookory/${imageId}`)
+      .then((result) => console.log("result: ", result));
+
+    // Then delete from database
+    await Book.findByIdAndDelete(bookId);
+    return res.status(200).json({ message: "Book deleted successfully." });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -89,10 +101,47 @@ const deleteBook = async (req, res) => {
 const updateBook = async (req, res) => {
   try {
     const bookId = req.params.id;
-    const update = req.body;
+    const { updateData } = req.body;
 
-    await Book.updateOne({ _id: bookId }, update);
-    res.json({ message: "Book updated successfuly!" });
+    const book = await Book.findById(bookId);
+
+    // This is when the image is changed
+    if (updateData.image && updateData.image.startsWith("data:image")) {
+      // Delete the previous one first
+      const parts = book.image.split("/");
+      const fileName = parts[parts.length - 1]; // Extract the last part: "ihwklaco9wt2d0kqdqrs.png"
+      const imageId = fileName.split(".")[0];
+      cloudinary.uploader
+        .destroy(`Bookory/${imageId}`)
+        .then((result) => console.log("result: ", result));
+
+      // Then upload the new one
+      const imageResponse = await cloudinary.uploader.upload(updateData.image, {
+        folder: "/Bookory",
+      });
+
+      const updatedBook = await Book.findByIdAndUpdate(
+        bookId,
+        {
+          ...updateData,
+          image: imageResponse.secure_url,
+        },
+        { new: true }
+      );
+
+      return res
+        .status(200)
+        .json({ message: "Book updated successfully.", book: updatedBook });
+    }
+
+    // when the image is  not updated.
+    const updatedBook = await Book.updateOne({ _id: bookId }, updateData);
+    if (!updatedBook) {
+      return res.status(404).json({ message: "Book not found." });
+    }
+    res
+      .status(200)
+      .json({ message: "Book updated successfully!", book: updatedBook });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

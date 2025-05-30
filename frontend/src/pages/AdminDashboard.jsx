@@ -1,7 +1,6 @@
 import { BookOpen, Package, Users, SquarePen, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useBookStore } from "../store/bookStore";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -223,11 +222,15 @@ const AdminDashboard = () => {
                     </td>
 
                     <td className="px-4 py-2 mt-4 space-x-2 text-right flex gap-1 items-center justify-end">
-                      <div className="p-3 bg-cream-2 rounded-md">
-                        <SquarePen className="h-4 w-4" />
+                      <div className="p-3 bg-cream-2 rounded-md cursor-pointer">
+                        <Link to={`/admin/book-edit/${book._id}`}>
+                          <SquarePen className="h-4 w-4" />
+                        </Link>
                       </div>
-                      <div className="p-3 bg-red-500 text-white rounded-md">
-                        <Trash2 className="h-4 w-4" />
+                      <div className="p-3 bg-red-500 text-white rounded-md cursor-pointer">
+                        <Link to={`/admin/book-delete/${book._id}`}>
+                          <Trash2 className="h-4 w-4" />
+                        </Link>
                       </div>
                     </td>
                   </tr>

@@ -9,7 +9,11 @@ const FeaturedBookList = () => {
     fetchBooks();
   }, [fetchBooks]);
 
-  const featuredBooks = books.filter((book) => book.bookstatus === "featured");
+  const featuredBooks = books
+    .filter((book) => book.bookstatus === "featured")
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 3);
+
   return (
     <div className="bg-[#f5f2d3] p-6 lg:px-20 py-10">
       <h1 className="text-3xl text-burgandy font-bold font-playflair text-center">

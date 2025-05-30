@@ -20,6 +20,8 @@ import OrderDetails from "./pages/OrderDetails";
 import RedirectNonAdminUsers from "./providers/RedirectNonAdminUsers";
 import UpdateOrderStatus from "./pages/UpdateOrderStatus";
 import AdminOrders from "./pages/AdminOrders";
+import EditBookPage from "./pages/EditBookPage";
+import DeleteBook from "./pages/DeleteBook";
 
 const App = () => {
   const { fetchUser, fetchingUser } = useAuthStore();
@@ -70,6 +72,26 @@ const App = () => {
             <MainLayout>
               <RedirectNonAdminUsers>
                 <UpdateOrderStatus />
+              </RedirectNonAdminUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/book-edit/:id"
+          element={
+            <MainLayout>
+              <RedirectNonAdminUsers>
+                <EditBookPage />
+              </RedirectNonAdminUsers>
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/book-delete/:id"
+          element={
+            <MainLayout>
+              <RedirectNonAdminUsers>
+                <DeleteBook />
               </RedirectNonAdminUsers>
             </MainLayout>
           }
