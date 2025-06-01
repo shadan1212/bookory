@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/order";
+const API_URL = "https://bookory.onrender.com/api/order";
 axios.defaults.withCredentials = true;
 
 export const useOrderStore = create((set) => ({

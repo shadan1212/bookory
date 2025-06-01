@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const APP_URL = "http://localhost:5000/api/user";
+const APP_URL = "https://bookory.onrender.com/api/user";
 axios.defaults.withCredentials = true;
 
 export const useAuthStore = create((set) => ({
