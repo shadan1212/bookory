@@ -15,14 +15,14 @@ const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "https://bookory-1.onrender.com",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
-
+// console.log(process.env.CLIENT_URL);
 // Routes
 app.use("/api/user", userRoutes);
 app.use("/api/book", bookRoutes);
