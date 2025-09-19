@@ -9,6 +9,7 @@ const BookCard = ({ book }) => {
           <img
             src={book.image}
             alt="Book-Image"
+            loading="lazy"
             className="w-full h-90 object-cover"
           />
           <div className="p-4 bg-white">

@@ -2,7 +2,9 @@ import { create } from "zustand";
 import axios from "axios";
 import { useOrderStore } from "./orderStore";
 
-const API_URL = "https://bookory.onrender.com/api/cart";
+const URL = import.meta.env.VITE_API_URL;
+
+const API_URL = `${URL}/cart`;
 axios.defaults.withCredentials = true;
 
 export const useCartStore = create((set, get) => ({

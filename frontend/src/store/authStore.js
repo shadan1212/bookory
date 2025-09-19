@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const APP_URL = "https://bookory.onrender.com/api/user";
+const URL = import.meta.env.VITE_API_URL;
+
+const API_URL = `${URL}/user`;
 axios.defaults.withCredentials = true;
 
 export const useAuthStore = create((set) => ({
@@ -16,7 +18,7 @@ export const useAuthStore = create((set) => ({
   signup: async (username, email, password) => {
     set({ isLoading: true, message: null });
     try {
-      const response = await axios.post(`${APP_URL}/signup`, {
+      const response = await axios.post(`${API_URL}/signup`, {
         username,
         email,
         password,
@@ -36,7 +38,7 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, message: null, error: null });
 
     try {
-      const response = await axios.post(`${APP_URL}/login`, {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password,
       });
@@ -57,7 +59,7 @@ export const useAuthStore = create((set) => ({
     set({ fetchingUser: true, error: null });
 
     try {
-      const response = await axios.get(`${APP_URL}/fetch-user`);
+      const response = await axios.get(`${API_URL}/fetch-user`);
 
       set({ user: response.data, fetchingUser: false });
     } catch (error) {
@@ -74,7 +76,7 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null, message: null });
 
     try {
-      const response = await axios.post(`${APP_URL}/logout`);
+      const response = await axios.post(`${API_URL}/logout`);
       const { message } = response.data;
 
       set({ message, isLoading: false, error: null, user: null });

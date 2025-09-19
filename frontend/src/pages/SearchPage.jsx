@@ -55,32 +55,32 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="bg-cream-2 min-h-screen py-12 px-6 lg:px-30">
+    <div className="bg-cream-2 min-h-screen overflow-hidden py-12 px-4 lg:px-30">
       <Link to={"/"}>
         <div className="flex items-center text-gray-1 hover:text-black cursor-pointer mb-6">
           <ChevronLeft className="h-4 w-4" />
           <p className="text-gray-1 hover:text-black">Back</p>
         </div>
       </Link>
-      <h1 className="text-burgandy text-4xl text-center font-bold font-playflair">
+      <h1 className="text-burgandy text-2xl md:text-4xl text-center font-bold font-playflair">
         Search Books
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className=" relative flex items-center justify-center gap-0 mt-10"
+        className="w-full max-w-xl mx-auto mt-10 flex"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-150 py-3 px-6 border-gray-300 bg-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-brown-2"
+          className="w-full py-3 px-6 border-gray-300 bg-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-brown-2"
           placeholder="Search by title, author, or genre..."
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-brown-2 text-white font-medium px-5 p-3 rounded-r-md cursor-pointer"
+          className="bg-brown-2 text-white font-medium px-5 py-3 rounded-r-md cursor-pointer border border-brown-2"
         >
           {isLoading ? "Searching..." : "Search"}
         </button>
@@ -94,7 +94,7 @@ const SearchPage = () => {
 
       {hasSearched && (
         <div className="max-w-6xl mx-auto mt-8">
-          <h2 className="text-2xl font-medium font-poppins text-center mb-4">
+          <h2 className=" text-xl md:text-2xl font-medium font-poppins text-center mb-4">
             Search Results: {searchResults.length}{" "}
             {searchResults.length === 1 ? "book" : "books"} found
           </h2>
@@ -106,7 +106,7 @@ const SearchPage = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-2">
               {searchResults.map((book) => (
                 <BookCard key={book._id} book={book} />
               ))}

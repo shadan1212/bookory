@@ -24,15 +24,17 @@ import EditBookPage from "./pages/EditBookPage";
 import DeleteBook from "./pages/DeleteBook";
 
 const App = () => {
-  const { fetchUser, fetchingUser } = useAuthStore();
+  const { user, fetchUser } = useAuthStore();
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    // 1. Check for a token in local storage (or wherever you store it)
+    const token = localStorage.getItem("token");
 
-  if (fetchingUser) {
-    return <p>Loading...</p>;
-  }
+    // 2. Only fetch if a token exists AND the user object is not already in the state
+    if (token && !user) {
+      fetchUser();
+    }
+  }, [user, fetchUser]);
 
   return (
     <>

@@ -1,59 +1,51 @@
 import { Facebook, Twitter, Instagram } from "lucide-react";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <div className="bg-brown-3  p-6 lg:px-20">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-xl font-medium text-white font-playflair">
-            Bookory
-          </h2>
-          <p className="text-gray-300 leading-tight text-sm">
-            Your trusted online bookstore with a vast <br /> selection of books
-            across all genres.
+    <footer className="bg-brown-3 text-stone-100">
+      <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center text-center">
+          {/* Brand Name */}
+          <h2 className="text-3xl font-bold font-playflair">Bookory</h2>
+
+          {/* Description */}
+          <p className="mt-3 max-w-md text-stone-200">
+            Your trusted online bookstore with a vast selection of books across
+            all genres.
           </p>
-          <div className="flex items-center gap-6 mt-4">
-            <Facebook className="text-gray-300" />
-            <Twitter className="text-gray-300" />
-            <Instagram className="text-gray-300" />
+
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6 mt-6">
+            <a
+              href="www.linkedin.com/in/mohammad-shadan-"
+              className="text-stone-300 hover:text-stone-100 transition-colors duration-300"
+            >
+              <FaLinkedinIn className="h-6 w-6" />
+            </a>
+            <a
+              href="https://x.com/mshadan_"
+              className="text-stone-300 hover:text-stone-100 transition-colors duration-300"
+            >
+              <FaXTwitter className="h-6 w-6" />
+            </a>
+            <a
+              href="https://github.com/shadan1212"
+              className="text-stone-300 hover:text-stone-100 transition-colors duration-300"
+            >
+              <FaGithub className="h-6 w-6" />
+            </a>
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-xl font-medium text-white font-playflair">
-            Shop
-          </h2>
-          <span className="text-gray-300 text-sm">All Books</span>
-          <span className="text-gray-300 text-sm">Featured</span>
-          <span className="text-gray-300 text-sm">Bestsellers</span>
-          <span className="text-gray-300 text-sm">New Releases</span>
-          <span className="text-gray-300 text-sm">Special Offers</span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-xl font-medium text-white font-playflair">
-            Help
-          </h2>
-          <span className="text-gray-300 text-sm">Shopping</span>
-          <span className="text-gray-300 text-sm">Returns</span>
-          <span className="text-gray-300 text-sm">FAQs</span>
-          <span className="text-gray-300 text-sm">Contact</span>
-          <span className="text-gray-300 text-sm">Gift Cards</span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-xl font-medium text-white font-playflair">
-            About
-          </h2>
-          <span className="text-gray-300 text-sm">Our Story</span>
-          <span className="text-gray-300 text-sm">Press</span>
-          <span className="text-gray-300 text-sm">Blog</span>
-          <span className="text-gray-300 text-sm">Careers</span>
-          <span className="text-gray-300 text-sm">Privacy Policy</span>
+
+          {/* Copyright */}
+          <p className="mt-8 text-sm text-stone-200">
+            &copy; 2025 Shadan | Bookory. All rights reserved.
+          </p>
         </div>
       </div>
-      <div className="border-t-[0.3px] border-gray-400 mt-8">
-        <p className="text-gray-300 text-center text-sm mt-6 mb-4">
-          &copy; 2025 Bookory. All rights reserved.
-        </p>
-      </div>
-    </div>
+    </footer>
   );
 };
 

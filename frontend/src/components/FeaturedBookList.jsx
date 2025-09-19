@@ -46,9 +46,9 @@ const FeaturedBookList = () => {
                     {book.description}
                   </p>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-semibold">${book.price}</span>
-                  <button className="bg-brown-2 hover:bg-brown-700 text-white font-medium py-2 px-3 rounded cursor-pointer">
+                <div className="flex flex-col justify-start md:flex-row items-center md:justify-between">
+                  <p className="text-lg font-semibold">${book.price}</p>
+                  <button className="bg-brown-2 text-sm hover:bg-brown-700 text-white font-medium py-2 px-3 rounded cursor-pointer">
                     Details
                   </button>
                 </div>

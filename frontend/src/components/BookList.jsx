@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import BookCard from "./BookCard";
 
 const BookList = () => {
-  const { books, fetchBooks } = useBookStore();
+  const { books, fetchBooks, isLoading } = useBookStore();
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -28,6 +28,10 @@ const BookList = () => {
       });
     }
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const popularBooks = books.filter((book) => book.bookstatus === "popular");
 

@@ -66,7 +66,7 @@ const BookDetails = () => {
               {book?.genre}
             </button>
             <p className="font-medium text-2xl mb-6">${book?.price}</p>
-            <p className="line-clamp-4 text-lg font-normal">
+            <p className="line-clamp-4 trxt-sm md:text-lg font-normal">
               {book?.description}
             </p>
             <div className="flex gap-4 mt-8 mb-8">
@@ -89,11 +89,11 @@ const BookDetails = () => {
           </div>
           <div className="mt-8 space-y-4">
             <h2 className="font-playflair font-bold text-lg">Details</h2>
-            <div className="flex items-center gap-50">
+            <div className="flex items-center gap-20 md:gap-50">
               <p className="font-medium text-gray-1">Genre</p>
               <p className="font-light">{book?.genre}</p>
             </div>
-            <div className="flex items-center gap-50">
+            <div className="flex items-center gap-20 md:gap-50">
               <p className="font-medium text-gray-1">Added</p>
               <p className="font-light">{formatDate(book?.createdAt)}</p>
             </div>
@@ -103,7 +103,7 @@ const BookDetails = () => {
       <div className="mt-15">
         <h1 className="font-playflair text-2xl font-bold">Similar Books</h1>
         {similarBooks.length > 0 ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 ">
+          <div className="grid grid-cols-1 lg:grid-cols-4 ">
             {similarBooks.map((book) => (
               <BookCard key={book._id} book={book} />
             ))}

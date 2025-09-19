@@ -4,9 +4,9 @@ import BookList from "../components/BookList";
 import FeaturedBookList from "../components/FeaturedBookList";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
-import Newsletter from "../components/Newsletter";
 import WhyUs from "../components/WhyUs";
 import { useEffect } from "react";
+import FeaturedAuthors from "../components/FeaturedAuthors";
 
 const Homepage = () => {
   const location = useLocation();
@@ -29,7 +29,7 @@ const Homepage = () => {
       <WhyUs />
       <BookList />
       <FeaturedBookList />
-      <Newsletter />
+      <FeaturedAuthors />
       <Footer />
     </div>
   );

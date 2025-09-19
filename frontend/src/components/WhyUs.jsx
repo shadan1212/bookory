@@ -1,51 +1,58 @@
-import { Book, ShoppingBag, UserCheck } from "lucide-react";
-import React from "react";
+import { Library, Mail, User } from "lucide-react";
+
+const features = [
+  {
+    icon: <Library className="h-10 w-10" />,
+    title: "Extensive Collection",
+    description:
+      "Discover thousands of titles across all genres, from bestsellers to rare finds.",
+  },
+  {
+    icon: <Mail className="h-10 w-10" />,
+    title: "Fast Delivery",
+    description:
+      "Get your books delivered quickly and safely to your doorstep.",
+  },
+  {
+    icon: <User className="h-10 w-10" />,
+    title: "Personalized Recommendations",
+    description:
+      "Get tailored book suggestions based on your reading history and preferences.",
+  },
+];
 
 const WhyUs = () => {
   return (
-    <section className="p-15">
-      <div className="flex flex-col space-y-20 justify-center items-center">
-        <h1 className="text-brown-1 text-4xl font-bold font-playflair">
-          Why Choose Bookory
-        </h1>
-        <div className="flex flex-col lg:flex-row gap-35">
-          <div className="space-y-4 flex flex-col items-center">
-            <div className="h-18 w-18 bg-cream-1 rounded-full flex items-center justify-center">
-              <Book className="w-8 h-8 text-burgandy" />
-            </div>
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Title */}
+        <div className="text-center">
+          <h2 className="text-3xl font-bold font-playflair tracking-tight text-[#7a5b3a] sm:text-4xl">
+            Why Choose Bookory
+          </h2>
+        </div>
 
-            <h1 className="font-playflair text-xl font-bold">
-              Extensive Collection
-            </h1>
-            <p className="text-center text-gray-500">
-              Discover thousands of titles across all genres, <br />
-              from bestsellers to rare finds.
-            </p>
-          </div>
-          <div className="space-y-4 flex flex-col items-center">
-            <div className="h-18 w-18 bg-cream-1 rounded-full flex items-center justify-center">
-              <ShoppingBag className="w-8 h-8 text-burgandy" />
+        {/* Features Grid */}
+        <div className="mt-16 grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-8">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="flex flex-col items-center text-center"
+            >
+              {/* Icon */}
+              <div className="flex items-center justify-center h-20 w-20 rounded-full bg-yellow-100 text-burgandy">
+                {feature.icon}
+              </div>
+              {/* Title */}
+              <h3 className="mt-6 text-lg font-bold text-stone-900">
+                {feature.title}
+              </h3>
+              {/* Description */}
+              <p className="mt-2 text-base text-stone-600">
+                {feature.description}
+              </p>
             </div>
-
-            <h1 className="font-playflair text-xl font-bold">Fast Delivery</h1>
-            <p className="text-center text-gray-500">
-              Get your books delivered quickly and safely to <br /> your
-              doorstep.
-            </p>
-          </div>
-          <div className="space-y-4 flex flex-col items-center">
-            <div className="h-18 w-18 bg-cream-1 rounded-full flex items-center justify-center">
-              <UserCheck className="w-8 h-8 text-burgandy" />
-            </div>
-
-            <h1 className="font-playflair text-xl font-bold">
-              Personalized Recommendations
-            </h1>
-            <p className="text-center text-gray-500">
-              Get tailored book suggestions based on your <br /> reading history
-              and preferences.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

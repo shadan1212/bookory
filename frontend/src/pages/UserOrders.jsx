@@ -38,10 +38,10 @@ const UserOrders = () => {
         <div className="flex flex-col gap-5">
           <div>
             <h1 className="font-playflair text-3xl text-center font-bold pl-2 lg:text-start">
-              My Account, {user?.username}
+              My Account
             </h1>
             <p className="text-gray-1 text-center lg:text-start text-lg pl-2">
-              Welcome back
+              Welcome back, {user?.username}
             </p>
           </div>
 
@@ -62,7 +62,7 @@ const UserOrders = () => {
             </div>
           </div>
         </div>
-        <div className="container mx-auto h-[50vh] bg-white shadow rounded-xl p-8 mt-12">
+        <div className="container mx-auto  bg-white shadow rounded-xl p-8 mt-12">
           <div>
             <h1 className="font-playflair font-semibold mb-1 text-2xl">
               Your Orders

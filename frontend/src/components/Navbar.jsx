@@ -24,10 +24,10 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link to={"/"}>
-          <div className="flex items-center gap-3 cursor-pointer">
-            <Book className="text-burgandy h-10 w-10" />
+          <div className="flex items-center gap-2 cursor-pointer">
+            <Book className="text-burgandy h-7 w-7" />
 
-            <span className="font-playflair text-brown-1 font-bold text-3xl">
+            <span className="font-playflair text-brown-1 font-bold text-2xl">
               Bookory
             </span>
           </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
               </button>
             </Link>
             <Link to={"/signup"}>
-              <button className="bg-brown-2 hover:bg-brown-2/90 px-5 py-3 rounded-lg cursor-pointer text-white text-xl font-semibold">
+              <button className="bg-brown-2 hover:bg-brown-2/90 px-5 py-3 rounded-lg cursor-pointer text-white text-sm font-semibold">
                 Sign Up
               </button>
             </Link>

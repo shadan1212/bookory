@@ -1,4 +1,4 @@
-import HeroImage from "../assets/hero_books.jpg";
+import HeroImage from "../assets/hero.jpg";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
@@ -12,13 +12,12 @@ const Hero = () => {
     >
       <div className="flex flex-col space-y-6 lg:flex-row items-center justify-between w-full gap-8 z-10">
         <div className="max-w-2xl space-y-6 text-center lg:text-left">
-          <h1 className="text-[65px] font-bold text-brown-1 leading-tight font-playflair">
-            Discover Your Next <br /> Favorite Book
+          <h1 className="text-[45px] md:text-[65px] font-bold text-brown-1 leading-tight font-playflair">
+            Discover Your Next Favorite Book
           </h1>
-          <p className="text-gray-500 text-xl">
-            Explore our vast collection of books across all genres. From <br />
-            bestsellers to hidden gems, find the perfect read for any <br />
-            occasion.
+          <p className="text-gray-500 text-sm md:text-xl">
+            Explore our vast collection of books across all genres. From
+            bestsellers to hidden gems, find the perfect read for any occasion.
           </p>
 
           {user ? (
@@ -45,11 +44,11 @@ const Hero = () => {
           )}
         </div>
 
-        <div className="w-full max-w-2xl bg-[linear-gradient(to_right,_white,_#D4AF37,_white)] py-5 relative rounded-2xl">
+        <div className="w-full max-w-2xl py-5 relative rounded-2xl">
           <img
             src={HeroImage}
             alt="Hero Books"
-            className="w-full h-[65vh] rotate-[-5deg] rounded-2xl object-cover z-10 relative  shadow-2xl"
+            className="w-full h-[65vh]  rounded-xl object-cover z-10 relative  shadow-xl"
           />
         </div>
       </div>

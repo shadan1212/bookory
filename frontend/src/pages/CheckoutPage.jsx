@@ -101,6 +101,11 @@ const CheckoutPage = () => {
       return;
     }
 
+    if (!user) {
+      toast.error("You are not logged in.");
+      navigate("/login");
+    }
+
     const orderData = {
       items: [
         {
