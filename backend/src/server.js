@@ -12,10 +12,12 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+// const frontendUrl = process.env.FRONTEND_URL;
+
 // Middlewares
 app.use(
   cors({
-    origin: "https://bookory-1.onrender.com",
+    origin: "https://bookory-one.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
