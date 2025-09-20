@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use(
   cors({
-    origin: "https://bookory-one.vercel.app",
+    origin: "https://bookory.shadan.tech",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
