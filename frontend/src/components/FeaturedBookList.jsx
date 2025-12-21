@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useBookStore } from "../store/bookStore";
 import { Link } from "react-router-dom";
 
 const FeaturedBookList = () => {
-  const { books, fetchBooks } = useBookStore();
+  const { featuredBooks, fetchHomeBooks } = useBookStore();
 
   useEffect(() => {
-    fetchBooks();
-  }, [fetchBooks]);
-
-  const featuredBooks = books
-    .filter((book) => book.bookstatus === "featured")
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 3);
+    fetchHomeBooks();
+  }, [fetchHomeBooks]);
 
   return (
     <div className="bg-[#f5f2d3] p-6 lg:px-20 py-10">

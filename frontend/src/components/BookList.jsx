@@ -4,12 +4,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import BookCard from "./BookCard";
 
 const BookList = () => {
-  const { books, fetchBooks, isLoading } = useBookStore();
+  const { trendingBooks, fetchHomeBooks, isLoading } = useBookStore();
   const scrollRef = useRef();
 
   useEffect(() => {
-    fetchBooks();
-  }, [fetchBooks]);
+    fetchHomeBooks();
+  }, [fetchHomeBooks]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -32,8 +32,6 @@ const BookList = () => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
-  const popularBooks = books.filter((book) => book.bookstatus === "popular");
 
   return (
     <div id="books" className="bg-[#faf9f5] p-6 lg:px-20 py-10">
@@ -61,7 +59,7 @@ const BookList = () => {
           ref={scrollRef}
           className="flex overflow-x-auto gap-4 no-scrollbar p-4"
         >
-          {popularBooks.map((book) => (
+          {trendingBooks.map((book) => (
             <BookCard key={book._id} book={book} />
           ))}
         </div>

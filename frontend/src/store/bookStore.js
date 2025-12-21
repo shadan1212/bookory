@@ -10,6 +10,8 @@ export const useBookStore = create((set) => ({
   // intitial states
   book: null,
   books: [],
+  featuredBooks: [],
+  trendingBooks: [],
   similarBooks: [],
   searchResults: [],
   isLoading: false,
@@ -81,6 +83,24 @@ export const useBookStore = create((set) => ({
         error: error.response.data.message || "Error fetching book.",
       });
       throw error;
+    }
+  },
+
+  // fetch home books
+  fetchHomeBooks: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.get(`${API_URL}/home`);
+      set({
+        trendingBooks: response.data.trending,
+        featuredBooks: response.data.featured,
+        isLoading: false,
+      });
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response?.data?.message || "Error fetching home books.",
+      });
     }
   },
 

@@ -57,6 +57,38 @@ const fetchBook = async (req, res) => {
   }
 };
 
+// fetch featured and popular books
+const getHomeBooks = async (req, res) => {
+  try {
+    const [trending, featured] = await Promise.all([
+      Book.find({ bookstatus: "popular" })
+        .select("title price image author")
+        .sort({ createdAt: -1 })
+        .limit(10)
+        .lean(),
+
+      Book.aggregate([
+        { $match: { bookstatus: "featured" } },
+        { $sample: { size: 3 } },
+        {
+          $project: {
+            title: 1,
+            image: 1,
+            author: 1,
+            description: 1,
+            price: 1,
+          },
+        },
+      ]),
+    ]);
+
+    res.status(200).json({ trending, featured });
+  } catch (error) {
+    console.error("Error in getHomeBooks:", error);
+    res.status(500).json({ message: "Error fetching home page books" });
+  }
+};
+
 // Fecth similar books
 const fetchSimilarBooks = async (req, res) => {
   try {
@@ -178,4 +210,5 @@ export default {
   updateBook,
   searchBooks,
   fetchSimilarBooks,
+  getHomeBooks,
 };

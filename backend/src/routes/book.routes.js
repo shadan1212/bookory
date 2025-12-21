@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post("/add-book", protect, requireAdmin, bookController.createBook);
 router.get("/books", bookController.fetchbooks);
+router.get("/home", bookController.getHomeBooks);
 router.get("/search", bookController.searchBooks);
 router.get("/:id", bookController.fetchBook);
 router.delete("/:id", protect, requireAdmin, bookController.deleteBook);
